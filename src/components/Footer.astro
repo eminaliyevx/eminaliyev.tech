@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+import { LINKS } from "../shared";
+
+export interface Props {
+  active: string;
+}
+
+const { active } = Astro.props;
+---
+
+<footer
+  class="fixed bottom-0 flex h-16 w-full items-center justify-center bg-neutral-50 dark:bg-neutral-900 lg:hidden"
+>
+  <nav class="flex-1">
+    <ul class="flex flex-1 items-center font-medium">
+      {
+        LINKS.map((link) => (
+          <li class="flex-1">
+            <a
+              aria-current={link.href === active ? "page" : undefined}
+              href={link.href}
+              class="flex flex-col items-center px-4 py-2 transition"
+              class:list={{
+                "hover:bg-neutral-200 dark:hover:bg-neutral-800":
+                  link.href !== active,
+                "bg-emerald-500 text-neutral-50 hover:bg-emerald-500 dark:bg-yellow-500 dark:text-neutral-900":
+                  link.href === active,
+              }}
+            >
+              <Icon
+                name={link.icon}
+                width="24"
+                height="24"
+                aria-hidden="true"
+              />
+              <span>{link.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</footer>

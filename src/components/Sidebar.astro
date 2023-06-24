@@ -1,0 +1,204 @@
+---
+import me from "../assets/images/me.jpg";
+import Icon from "./Icon.astro";
+
+const LOVE = [
+  {
+    icon: "javascript",
+  },
+  {
+    icon: "typescript",
+  },
+  {
+    icon: "react",
+  },
+  {
+    icon: "nextjs",
+  },
+  {
+    icon: "nodejs",
+  },
+  {
+    icon: "nestjs",
+  },
+  {
+    icon: "tailwind",
+  },
+];
+---
+
+<aside
+  aria-label="Sidebar"
+  class="fixed left-0 top-0 z-40 h-screen w-72 -translate-x-full transition lg:translate-x-0"
+>
+  <div
+    class="scrollbar-y h-full overflow-y-auto bg-neutral-50 px-4 py-8 dark:bg-neutral-900"
+  >
+    <div class="mb-4 h-60 w-60">
+      <img
+        src={me}
+        alt="Emin Aliyev"
+        class="h-full w-full rounded-full ring ring-emerald-500 ring-offset-2 ring-offset-neutral-50 dark:ring-yellow-500 dark:ring-offset-neutral-900"
+      />
+    </div>
+
+    <div class="mb-4 flex flex-col">
+      <span class="text-2xl font-semibold">Emin Aliyev</span>
+      <span class="text-lg">🧑🏻‍💻 Software Developer</span>
+    </div>
+
+    <a
+      href="/CV.pdf"
+      class="mb-4 flex h-8 w-full items-center justify-center gap-2 rounded-lg border border-emerald-500 px-2 text-center text-sm font-semibold uppercase text-emerald-500 transition hover:bg-emerald-500 hover:text-neutral-50 active:scale-95 dark:border-yellow-500 dark:text-yellow-500 dark:hover:bg-yellow-500 dark:hover:text-neutral-900"
+      download
+    >
+      <svg
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-file-cv"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+        <path
+          d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+        ></path>
+        <path d="M11 12.5a1.5 1.5 0 0 0 -3 0v3a1.5 1.5 0 0 0 3 0"></path>
+        <path d="M13 11l1.5 6l1.5 -6"></path>
+      </svg>
+
+      <span>Download CV</span>
+    </a>
+
+    <div class="mb-4 flex flex-col">
+      <span class="font-medium">✅ Summary</span>
+
+      <figure>
+        <blockquote
+          cite="https://kelvindorsey.com/my-unmatched-perspicacity-coupled-with-my-sheer-indefatigability-makes-me-a-feared-opponent-in-any-realm-of-human-endeavor/"
+          class="text-justify"
+        >
+          <p>
+            My unmatched perspicacity coupled with my sheer indefatigability
+            makes me a feared opponent in any realm of human endeavor.
+          </p>
+        </blockquote>
+
+        <figcaption class="text-right">
+          <a
+            href="https://en.wikipedia.org/wiki/Emory_Tate"
+            target="_blank"
+            class="italic hover:underline">Emory Tate</a
+          >
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="mb-4 flex flex-col gap-2">
+      <span class="font-medium">❤️‍🔥 Love</span>
+
+      <div class="grid grid-cols-4 gap-4">
+        {
+          LOVE.map((item) => (
+            <div class="aspect-square h-12 overflow-hidden rounded-lg">
+              <Icon
+                name={item.icon}
+                width="48"
+                height="48"
+                aria-hidden="true"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="font-medium">Contact</span>
+
+      <a href="mailto:eminaliyevx@gmail.com" class="flex items-center gap-2">
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-mail"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"
+          ></path>
+          <path d="M3 7l9 6l9 -6"></path>
+        </svg>
+
+        <span>eminaliyevx@gmail.com</span>
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/emin-aliyev-17b806235/"
+        class="flex items-center gap-2"
+      >
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-brand-linkedin"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+          ></path>
+          <path d="M8 11l0 5"></path>
+          <path d="M8 8l0 .01"></path>
+          <path d="M12 16l0 -5"></path>
+          <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+        </svg>
+
+        <span>Emin Aliyev</span>
+      </a>
+
+      <a href="https://github.com/eminaliyevx" class="flex items-center gap-2">
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-brand-github"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+          ></path>
+        </svg>
+
+        <span>eminaliyevx</span>
+      </a>
+    </div>
+  </div>
+</aside>

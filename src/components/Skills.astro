@@ -1,0 +1,111 @@
+---
+import Icon from "./Icon.astro";
+
+const LANGUAGES = [
+  { name: "Azerbaijani", icon: "az" },
+  { name: "English", icon: "uk" },
+];
+
+const TECHNICAL_SKILLS = [
+  { name: "HTML5", icon: "html5" },
+  { name: "CSS3", icon: "css3" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "Bootstrap", icon: "bootstrap" },
+  { name: "Sass", icon: "sass" },
+  { name: "Tailwind CSS", icon: "tailwind" },
+  { name: "Vue.js", icon: "vue" },
+  { name: "React (Native)", icon: "react" },
+  { name: "Next.js", icon: "nextjs" },
+  { name: "Astro", icon: "astro" },
+  { name: "Node.js", icon: "nodejs" },
+  { name: "NestJS", icon: "nestjs" },
+  { name: "tRPC", icon: "trpc" },
+  { name: "PostgreSQL", icon: "postgresql" },
+  { name: "Prisma", icon: "prisma" },
+  { name: "Git", icon: "git" },
+  { name: "Firebase", icon: "firebase" },
+  { name: "Linux", icon: "linux" },
+];
+
+const SOFT_SKILLS = [
+  { name: "Leadership", icon: "leadership" },
+  { name: "Teamwork", icon: "teamwork" },
+  { name: "Problem-solving", icon: "problem-solving" },
+  { name: "Research", icon: "research" },
+  { name: "Academic writing", icon: "writing" },
+];
+---
+
+<section>
+  <div class="mb-4">
+    <span class="text-2xl font-semibold">🤹🏻 Skills</span>
+  </div>
+
+  <div>
+    <span
+      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
+      >Languages</span
+    >
+
+    <div class="mb-4 flex gap-4">
+      {
+        LANGUAGES.map((language) => (
+          <div class="flex cursor-pointer items-center gap-2 rounded-2xl bg-neutral-200 p-2 transition hover:scale-95 dark:bg-neutral-800">
+            <Icon
+              name={language.icon}
+              width="32"
+              height="32"
+              aria-hidden="true"
+            />
+            <span class="text-neutral-900 dark:text-neutral-50">
+              {language.name}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <span
+      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
+      >Technical skills</span
+    >
+
+    <div class="mb-4 flex flex-wrap gap-4">
+      {
+        TECHNICAL_SKILLS.map((skill) => (
+          <div class="flex cursor-pointer items-center gap-2 rounded-2xl bg-neutral-200 p-2 transition hover:scale-95 dark:bg-neutral-800">
+            <Icon name={skill.icon} width="32" height="32" aria-hidden="true" />
+            <span class="text-neutral-900 dark:text-neutral-50">
+              {skill.name}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <span
+      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
+      >Soft skills</span
+    >
+
+    <div class="flex flex-wrap gap-4">
+      {
+        SOFT_SKILLS.map((skill) => (
+          <div class="flex cursor-pointer items-center gap-2 rounded-2xl bg-neutral-200 p-2 transition hover:scale-95 dark:bg-neutral-800">
+            <Icon
+              name={skill.icon}
+              width="32"
+              height="32"
+              aria-hidden="true"
+              class="text-emerald-500 dark:text-yellow-500"
+            />
+            <span class="text-neutral-900 dark:text-neutral-50">
+              {skill.name}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

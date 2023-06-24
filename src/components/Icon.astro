@@ -1,12 +1,13 @@
+---
 import { parse } from "node-html-parser";
 
-type IconProps = {
-  icon: string;
+export interface Props {
+  name: string;
   [x: string]: string;
-};
+}
 
-const Icon = ({ icon, ...rest }: IconProps) => {
-  const path = `/src/assets/icons/${icon}.svg`;
+const getIcon = (name: string) => {
+  const path = `/src/assets/icons/${name}.svg`;
   const files = import.meta.glob("/src/assets/icons/*.svg", {
     as: "raw",
     eager: true,
@@ -22,7 +23,16 @@ const Icon = ({ icon, ...rest }: IconProps) => {
 
   const { attributes, innerHTML } = svg;
 
-  return <svg {...attributes} {...rest} innerHTML={innerHTML} />;
+  return {
+    attributes,
+    innerHTML,
+  };
 };
 
-export default Icon;
+const { name, ...rest } = Astro.props;
+const { attributes, innerHTML } = getIcon(name);
+
+const props = { ...attributes, ...rest };
+---
+
+<svg {...props} set:html={innerHTML} />

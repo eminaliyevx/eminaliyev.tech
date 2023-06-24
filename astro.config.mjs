@@ -1,9 +1,8 @@
-import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  integrations: [tailwind({ config: { applyBaseStyles: false } }), solidJs()],
+  integrations: [tailwind({ config: { applyBaseStyles: false } })],
   vite: {
     build: {
       rollupOptions: {
@@ -17,4 +16,5 @@ export default defineConfig({
     assets: "assets",
   },
   compressHTML: true,
+  site: "https://eminaliyev.tech",
 });

@@ -1,37 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Skills from "../components/Skills.astro";
 ---
 
-<Layout title="Resume | Emin Aliyev" active="/">
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
-  <p>Resume</p>
+<Layout
+  active="/"
+  seo={{
+    title: "CV",
+    description:
+      "My unmatched perspicacity coupled with my sheer indefatigability makes me a feared opponent in any realm of human endeavor.",
+    openGraph: {
+      basic: {
+        title: "CV | Emin Aliyev",
+        type: "website",
+        image: "https://eminaliyev.tech/assets/b3f2a3ef.jpg",
+      },
+    },
+  }}
+>
+  <Experience />
+  <Education />
+  <Skills />
 </Layout>

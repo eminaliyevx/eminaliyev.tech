@@ -1,0 +1,96 @@
+---
+import ada from "../assets/images/ada.svg";
+import khas from "../assets/images/khas.png";
+---
+
+<section class="mb-8">
+  <div class="mb-4 flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+    <span class="text-2xl font-semibold">🏫 Education</span>
+    <span
+      class="rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+      >Bachelor of Science in Information Technology 🎓</span
+    >
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <div class="flex flex-col rounded-2xl p-5 shadow-lg dark:bg-neutral-800">
+      <div
+        class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
+      >
+        <div class="flex items-center gap-2">
+          <img src={ada} alt="ADA University" class="h-8" />
+
+          <div class="flex flex-col gap-1">
+            <span class="text-lg/none font-semibold">ADA University</span>
+            <span class="leading-none">Information Technology</span>
+          </div>
+        </div>
+
+        <div>
+          <span
+            class="mb-2 block rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+          >
+            September 2019 - May 2023
+          </span>
+
+          <span
+            class="block w-max rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900 sm:ml-auto"
+          >
+            GPA: 3.68/4.0
+          </span>
+        </div>
+      </div>
+
+      <ul
+        class="mb-8 list-inside list-square columns-2 gap-8 marker:text-emerald-500 dark:marker:text-yellow-600"
+      >
+        <li>Programming Principles</li>
+        <li>Calculus</li>
+        <li>Discrete Structures</li>
+        <li>Linear Algebra</li>
+        <li>Data Structures & Algorithms</li>
+        <li>Database Systems</li>
+        <li>IT Project Management</li>
+        <li>Artificial Intelligence</li>
+      </ul>
+    </div>
+
+    <div class="flex flex-col rounded-2xl p-5 shadow-lg dark:bg-neutral-800">
+      <div
+        class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
+      >
+        <div class="flex items-center gap-2">
+          <img src={khas} alt="Kadir Has University" class="h-8" />
+
+          <div class="flex flex-col gap-1">
+            <span class="text-lg/none font-semibold">Kadir Has University</span>
+            <span class="leading-none">Computer Engineering</span>
+          </div>
+        </div>
+
+        <div>
+          <span
+            class="mb-2 block rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+          >
+            September 2021 - January 2022
+          </span>
+
+          <span
+            class="block w-max rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900 sm:ml-auto"
+          >
+            GPA: 3.8/4.0
+          </span>
+        </div>
+      </div>
+
+      <ul
+        class="mb-8 list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
+      >
+        <li>Ordinary Differential Equations</li>
+        <li>Computer Networks</li>
+        <li>Web Programming</li>
+        <li>Cloud Computing</li>
+      </ul>
+    </div>
+  </div>
+</section>

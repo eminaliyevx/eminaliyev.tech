@@ -1,0 +1,130 @@
+---
+import meetsoft from "../assets/images/meetsoft.svg";
+import atl from "../assets/images/atl.svg";
+import Icon from "./Icon.astro";
+
+const MEETSOFT_SKILLS = [
+  { icon: "html5" },
+  { icon: "css3" },
+  { icon: "javascript" },
+  { icon: "typescript" },
+  { icon: "react" },
+  { icon: "astro" },
+  { icon: "bootstrap" },
+  { icon: "sass" },
+  { icon: "tailwind" },
+  { icon: "mantine" },
+  { icon: "react-query" },
+  { icon: "i18next" },
+  { icon: "git" },
+];
+
+const ATL_SKILLS = [
+  { icon: "html5" },
+  { icon: "css3" },
+  { icon: "vue" },
+  { icon: "vuetify" },
+  { icon: "bootstrap" },
+  { icon: "sass" },
+  { icon: "git" },
+];
+---
+
+<section class="mb-8">
+  <div class="mb-4 flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+    <span class="text-2xl font-semibold">🧑🏻‍💻 Experience</span>
+    <span
+      class="rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+      >2 years of work experience ⏳</span
+    >
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <div class="flex flex-col rounded-2xl p-5 shadow-lg dark:bg-neutral-800">
+      <div
+        class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
+      >
+        <div class="flex items-center gap-2">
+          <img src={meetsoft} alt="Meetsoft" class="h-8" />
+
+          <div class="flex flex-col gap-1">
+            <span class="text-lg/none font-semibold">Meetsoft</span>
+            <span class="leading-none">Frontend Developer</span>
+          </div>
+        </div>
+
+        <span
+          class="shrink-0 rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+          >April 2022 - Present</span
+        >
+      </div>
+
+      <ul
+        class="mb-8 list-inside list-square leading-loose marker:text-emerald-500 dark:marker:text-yellow-600"
+      >
+        <li>Using modern web technologies in the new and existing projects.</li>
+        <li>Applying internationalization and localization in the projects.</li>
+        <li>Heavy usage of React in the development of the projects.</li>
+      </ul>
+
+      <div class="mt-auto flex flex-wrap gap-4">
+        {
+          MEETSOFT_SKILLS.map((skill) => (
+            <div class="aspect-square h-10 overflow-hidden rounded-lg">
+              <Icon
+                name={skill.icon}
+                width="40"
+                height="40"
+                aria-hidden="true"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col rounded-2xl p-5 shadow-lg dark:bg-neutral-800">
+      <div
+        class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
+      >
+        <div class="flex items-center gap-2">
+          <img src={atl} alt="ATL Tech" class="h-8" />
+
+          <div class="flex flex-col gap-1">
+            <span class="text-lg/none font-semibold">ATL Tech</span>
+            <span class="leading-none">Frontend Developer Intern</span>
+          </div>
+        </div>
+
+        <span
+          class="shrink-0 rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+          >April 2021 - July 2021</span
+        >
+      </div>
+
+      <ul
+        class="mb-8 list-inside list-square leading-loose marker:text-emerald-500 dark:marker:text-yellow-600"
+      >
+        <li>
+          Developed frontend of an admin dashboard working in Scrum workflow.
+        </li>
+        <li>Heavily used Vue.js in the development of the project.</li>
+      </ul>
+
+      <div class="mt-auto flex flex-wrap gap-4">
+        {
+          ATL_SKILLS.map((skill) => (
+            <div class="aspect-square h-10 overflow-hidden rounded-lg">
+              <Icon
+                name={skill.icon}
+                width="40"
+                height="40"
+                aria-hidden="true"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

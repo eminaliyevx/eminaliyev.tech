@@ -1,2 +1,1 @@
-export * from "./love";
-export * from "./routes";
+export * from "./links";
