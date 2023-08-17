@@ -1,0 +1,56 @@
+---
+import { cn } from "@/lib";
+import { LINKS } from "@/shared";
+import { Icon } from "astro-icon";
+import Button from "./Button.astro";
+
+export interface Props {
+  active: string;
+}
+
+const { active } = Astro.props;
+---
+
+<header
+  class="fixed left-0 top-0 flex h-16 w-full items-center justify-between bg-neutral-50/50 px-2 backdrop-blur dark:bg-neutral-900/50 lg:h-20 lg:pl-80 lg:pr-8"
+>
+  <button
+    type="button"
+    class="flex items-center rounded-lg p-3 hover:bg-neutral-200 dark:hover:bg-neutral-800 lg:hidden"
+    data-sidebar-toggle
+  >
+    <Icon name="menu-2" width="24" height="24" />
+    <span class="sr-only">Toggle sidebar</span>
+  </button>
+
+  <nav>
+    <ul class="hidden items-center gap-4 font-medium lg:flex">
+      {
+        LINKS.map((link) => (
+          <li>
+            <Button
+              as="a"
+              href={link.href}
+              variant="ghost"
+              class={cn("h-auto gap-2 px-4 py-3", {
+                "bg-emerald-500 text-neutral-50 hover:bg-emerald-500 dark:bg-yellow-500 dark:text-neutral-900 dark:hover:bg-yellow-500":
+                  link.href === active,
+              })}
+            >
+              <Icon name={link.icon} width="24" height="24" />
+              <span>{link.name}</span>
+            </Button>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <button
+    class="h-12 w-12 rounded-lg text-xl hover:bg-neutral-200 dark:hover:bg-neutral-800"
+    data-theme-toggle
+  >
+    <span class="hidden dark:inline">☀️</span>
+    <span class="inline dark:hidden">🌙</span>
+  </button>
+</header>

@@ -1,0 +1,75 @@
+---
+import type { IEducation } from "@/interfaces";
+import { Contentful, cn, convertDates } from "@/lib";
+import { Image } from "astro:assets";
+import Chip from "./Chip.astro";
+
+const education = (
+  await Contentful.withoutUnresolvableLinks.getEntries<IEducation>({
+    content_type: "education",
+    order: ["sys.createdAt"],
+  })
+).items.map(({ fields }) => ({
+  ...fields,
+  logo: fields.logo?.fields.file,
+}));
+---
+
+<section class="mb-8">
+  <div class="mb-4 flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+    <h1 class="text-2xl font-semibold">🏫 Education</h1>
+    <span
+      class="rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
+      >Bachelor of Science in Information Technology 🎓</span
+    >
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    {
+      education.map((education) => (
+        <div class="flex flex-col rounded-2xl bg-neutral-100 p-5 shadow-lg dark:bg-neutral-800">
+          <div class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+            <div class="flex items-center gap-2">
+              <Image
+                src={education.logo!.url}
+                alt={education.school}
+                width="44"
+                height="32"
+              />
+
+              <div class="flex flex-col gap-1">
+                <h2 class="text-lg/none font-semibold">{education.school}</h2>
+                <h3 class="leading-none">{education.program}</h3>
+              </div>
+            </div>
+
+            <div>
+              <Chip as="div" size="sm" class="mb-2">
+                {convertDates(education.startDate, education.endDate)}
+              </Chip>
+
+              <Chip
+                as="div"
+                size="sm"
+                class="w-max sm:ml-auto"
+              >{`GPA: ${education.gpa}/4.0`}</Chip>
+            </div>
+          </div>
+
+          <ul
+            class={cn(
+              "mb-8 list-inside list-square gap-8 marker:text-emerald-500 dark:marker:text-yellow-600",
+              {
+                "columns-2": education.courses.length > 4,
+              },
+            )}
+          >
+            {education.courses.map((course) => (
+              <li>{course}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
