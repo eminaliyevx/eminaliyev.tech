@@ -1,6 +1,6 @@
 ---
 import type { IEducation } from "@/interfaces";
-import { Contentful, cn, convertDates } from "@/lib";
+import { Contentful, calculateResizedWidth, cn, convertDates } from "@/lib";
 import { Image } from "astro:assets";
 import Chip from "./Chip.astro";
 
@@ -31,9 +31,13 @@ const education = (
           <div class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
             <div class="flex items-center gap-2">
               <Image
-                src={education.logo!.url}
+                src={`https:${education.logo!.url}`}
                 alt={education.school}
-                width="44"
+                width={calculateResizedWidth(
+                  education.logo!.details.image!.width,
+                  education.logo!.details.image!.height,
+                  32,
+                )}
                 height="32"
               />
 

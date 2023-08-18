@@ -20,3 +20,11 @@ export const convertDates = (startDate: string, endDate: string | null) => {
 
   return `${start} - ${end}`;
 };
+
+export const calculateResizedWidth = (
+  originalWidth: number,
+  originalHeight: number,
+  resizedHeight: number,
+) => {
+  return Math.round((originalWidth * resizedHeight) / originalHeight);
+};
