@@ -21,6 +21,9 @@ const button = cva(
       fullWidth: {
         true: "w-full",
       },
+      icon: {
+        true: "aspect-square px-0",
+      },
     },
   },
 );
@@ -32,6 +35,7 @@ const {
   variant = "primary",
   size = "md",
   fullWidth,
+  icon,
   class: className,
   as: Tag = "button",
   ...rest
@@ -39,7 +43,7 @@ const {
 ---
 
 <Tag
-  class={cn(button({ variant, size, fullWidth, class: className }))}
+  class={cn(button({ variant, size, fullWidth, icon, class: className }))}
   {...rest}
 >
   <slot />

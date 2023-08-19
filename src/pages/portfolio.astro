@@ -1,5 +1,23 @@
 ---
+import Button from "@/components/Button.astro";
+import type { IProject } from "@/interfaces";
+import { Contentful, calculateResizedWidth, cn } from "@/lib";
+import type { OutputFormat } from "@/types";
+import { Image, Picture } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
 import Layout from "../layouts/Layout.astro";
+
+const projects = (
+  await Contentful.withoutUnresolvableLinks.getEntries<IProject>({
+    content_type: "project",
+    order: ["sys.createdAt"],
+  })
+).items.map(({ fields }) => ({
+  ...fields,
+  logo: fields.logo?.fields.file,
+  skills: fields.skills.map((skill) => skill?.fields),
+  images: fields.images.map((image) => image?.fields),
+}));
 ---
 
 <Layout
@@ -7,15 +25,123 @@ import Layout from "../layouts/Layout.astro";
   seo={{
     title: "Portfolio",
     description:
-      "My unmatched perspicacity coupled with my sheer indefatigability makes me a feared opponent in any realm of human endeavor.",
+      "Explore my projects, learn about the technologies I have employed, and dive into live demos and source codes.",
     openGraph: {
       basic: {
         title: "Portfolio | Emin Aliyev",
         type: "website",
-        image: "https://eminaliyev.tech/assets/b3f2a3ef_8lcHN.webp",
+        image: "https://eminaliyev.tech/assets/b3f2a3ef_ZpQdKu.webp",
       },
     },
   }}
 >
-  Soon
+  <section class="mb-8">
+    <div
+      class="mb-4 flex flex-col items-start gap-2 sm:flex-row sm:items-center"
+    >
+      <h1 class="text-2xl font-semibold">⚗️ Projects</h1>
+    </div>
+
+    <div class="grid gap-8 xl:grid-cols-2">
+      {
+        projects.map((project) => (
+          <div class="grid gap-4 rounded-2xl bg-neutral-100 p-5 shadow-lg dark:bg-neutral-800 sm:grid-cols-2">
+            <div class="flex flex-col">
+              <div class="mb-4 overflow-hidden rounded-2xl">
+                {project.images.map((image, index) => (
+                  <div
+                    data-fancybox={`${project.name}`}
+                    data-src={`https:${image!.file!.url}`}
+                    class={cn(
+                      "group relative cursor-pointer after:absolute after:inset-0 after:bg-neutral-900/50 after:opacity-0 after:transition-opacity hover:after:opacity-100",
+                    )}
+                  >
+                    {index === 0 && (
+                      <>
+                        <Picture
+                          src={`https:${image!.file!.url}`}
+                          alt={image!.title!}
+                          widths={[768, 1536]}
+                          aspectRatio={2 / 1}
+                          sizes="(max-width: 768px) 100vw, 1536px"
+                          formats={["webp", "webp"]}
+                          loading="eager"
+                          width={image!.file!.details.image!.width}
+                          height={image!.file!.details.image!.height}
+                          class="w-full"
+                        />
+
+                        <Icon
+                          name="slideshow"
+                          width="24"
+                          height="24"
+                          class="absolute bottom-0 right-0 z-10 text-neutral-300 opacity-0 transition-[bottom,right] group-hover:bottom-2 group-hover:right-2 group-hover:opacity-100"
+                        />
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                {project.skills.map((skill) => (
+                  <div>
+                    <Icon name={skill?.icon} width="32" height="32" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="flex flex-col">
+              <div class="mb-2 flex items-center gap-2">
+                <Image
+                  src={`https:${project.logo!.url}`}
+                  alt={project.name}
+                  width={calculateResizedWidth(
+                    project.logo!.details.image!.width,
+                    project.logo!.details.image!.height,
+                    32,
+                  )}
+                  height={32}
+                  format={project.logo!.fileName.split(".")[1] as OutputFormat}
+                />
+
+                <h2 class="text-lg font-semibold">{project.name}</h2>
+              </div>
+
+              <h3 class="mb-4 text-justify">{project.description}</h3>
+
+              <div class="ml-auto mt-auto flex gap-2">
+                {project.githubLink && (
+                  <Button
+                    as="a"
+                    href={project.githubLink}
+                    target="_blank"
+                    variant="ghost"
+                    icon
+                    class="hover:bg-neutral-300 dark:hover:bg-neutral-700"
+                    aria-label="Link to the source code on GitHub"
+                  >
+                    <Icon name="brand-github" width="24" height="24" />
+                  </Button>
+                )}
+
+                {project.externalLink && (
+                  <Button
+                    as="a"
+                    href={project.externalLink}
+                    target="_blank"
+                    icon
+                    aria-label="Link to the project"
+                  >
+                    <Icon name="external-link" width="24" height="24" />
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 </Layout>

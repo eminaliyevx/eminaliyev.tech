@@ -1,4 +1,5 @@
 ---
+import "@/assets/styles/fancybox.css";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Sidebar from "@/components/Sidebar.astro";
@@ -26,6 +27,7 @@ const { active, seo } = Astro.props;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <script is:inline src="/fancybox.js"></script>
     <script is:inline>
       if (!window.initialized) {
         window.initialized = true;
@@ -98,6 +100,10 @@ const { active, seo } = Astro.props;
             document.documentElement.classList.remove("dark");
           }
         });
+    </script>
+
+    <script is:inline>
+      Fancybox.bind("[data-fancybox]");
     </script>
   </body>
 </html>
