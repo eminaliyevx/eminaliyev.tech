@@ -1,8 +1,9 @@
 ---
 import type { IExperience } from "@/interfaces";
 import { Contentful, calculateResizedWidth, convertDates } from "@/lib";
+import type { OutputFormat } from "@/types";
+import { Image } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
-import { Image } from "astro:assets";
 import Chip from "./Chip.astro";
 
 const experiences = (
@@ -23,7 +24,7 @@ const experiences = (
     <Chip variant="primary" size="sm">2 years of work experience ⏳</Chip>
   </div>
 
-  <div class="grid gap-4 md:grid-cols-2">
+  <div class="grid gap-8 md:grid-cols-2">
     {
       experiences.map((experience) => (
         <div class="flex flex-col rounded-2xl bg-neutral-100 p-5 shadow-lg dark:bg-neutral-800">
@@ -37,9 +38,9 @@ const experiences = (
                   experience.logo!.details.image!.height,
                   32,
                 )}
-                height="32"
+                height={32}
+                format={experience.logo!.fileName.split(".")[1] as OutputFormat}
               />
-
               <div class="flex flex-col gap-1">
                 <h2 class="text-lg/none font-semibold">{experience.company}</h2>
                 <h3 class="leading-none">{experience.position}</h3>

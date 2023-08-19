@@ -10,11 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/image": "^0.17.3",
     "@astrojs/sitemap": "^2.0.2",
     "@astrojs/tailwind": "^4.0.0",
     "@fancyapps/ui": "^5.0.22",
     "@fontsource-variable/open-sans": "^5.0.9",
-    "astro": "^2.10.9",
+    "astro": "^2.10.12",
     "astro-compressor": "^0.4.0",
     "astro-icon": "^0.8.1",
     "astro-seo": "^0.7.5",

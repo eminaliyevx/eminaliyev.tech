@@ -1,12 +1,16 @@
+import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import compressor from "astro-compressor";
-import { defineConfig, sharpImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   integrations: [
     tailwind({
       applyBaseStyles: false,
+    }),
+    image({
+      serviceEntryPoint: "@astrojs/image/sharp",
     }),
     sitemap(),
     compressor({
@@ -14,11 +18,7 @@ export default defineConfig({
     }),
   ],
   experimental: {
-    assets: true,
     viewTransitions: true,
-  },
-  image: {
-    service: sharpImageService(),
   },
   vite: {
     build: {
@@ -31,6 +31,7 @@ export default defineConfig({
   },
   build: {
     assets: "assets",
+    inlineStylesheets: "auto",
   },
   site: "https://eminaliyev.tech",
 });

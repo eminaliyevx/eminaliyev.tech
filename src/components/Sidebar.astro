@@ -2,8 +2,8 @@
 import me from "@/assets/images/me.jpg";
 import type { ISkill } from "@/interfaces";
 import { Contentful } from "@/lib";
+import { Picture } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
-import { Image } from "astro:assets";
 import Button from "./Button.astro";
 
 const love = (
@@ -23,7 +23,17 @@ const love = (
     <div
       class="mb-4 overflow-hidden rounded-full ring ring-emerald-500 ring-offset-2 ring-offset-neutral-50 dark:ring-yellow-500 dark:ring-offset-neutral-900"
     >
-      <Image src={me} alt="Emin Aliyev" />
+      <Picture
+        src={me}
+        alt="Emin Aliyev"
+        widths={[640, 900]}
+        sizes="(max-width: 640px) 100vw, 900px"
+        formats={["webp", "webp"]}
+        loading="eager"
+        width={me.width}
+        height={me.height}
+        class="w-full"
+      />
     </div>
 
     <div class="mb-4 flex flex-col">
