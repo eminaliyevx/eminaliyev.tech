@@ -46,11 +46,28 @@ const { active } = Astro.props;
     </ul>
   </nav>
 
-  <button
-    class="h-12 w-12 rounded-lg text-xl hover:bg-neutral-200 dark:hover:bg-neutral-800"
-    data-theme-toggle
-  >
-    <span class="hidden dark:inline">☀️</span>
-    <span class="inline dark:hidden">🌙</span>
-  </button>
+  <div class="flex items-center gap-2">
+    <Button
+      as="a"
+      href="https://github.com/eminaliyevx/eminaliyev.tech"
+      target="_blank"
+      variant="ghost"
+      icon
+      aria-label="Link to the source code on GitHub"
+      class="h-12"
+    >
+      <Icon name="brand-github" width="24" height="24" />
+    </Button>
+
+    <Button
+      variant="ghost"
+      icon
+      aria-label="Link to the source code on GitHub"
+      class="h-12 text-xl text-yellow-500"
+      data-theme-toggle
+    >
+      <Icon name="sun" width="24" height="24" class="hidden dark:block" />
+      <Icon name="moon" width="24" height="24" class="block dark:hidden" />
+    </Button>
+  </div>
 </header>
