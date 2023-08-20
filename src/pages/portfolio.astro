@@ -1,16 +1,18 @@
 ---
 import Button from "@/components/Button.astro";
+import Chip from "@/components/Chip.astro";
 import type { IProject } from "@/interfaces";
 import { Contentful, calculateResizedWidth, cn } from "@/lib";
 import type { OutputFormat } from "@/types";
 import { Image, Picture } from "@astrojs/image/components";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { Icon } from "astro-icon";
 import Layout from "../layouts/Layout.astro";
 
 const projects = (
   await Contentful.withoutUnresolvableLinks.getEntries<IProject>({
     content_type: "project",
-    order: ["sys.createdAt"],
+    order: ["fields.ongoing", "-fields.endDate"],
   })
 ).items.map(({ fields }) => ({
   ...fields,
@@ -83,13 +85,19 @@ const projects = (
                 ))}
               </div>
 
-              <div class="flex flex-wrap gap-4">
+              <div class="mb-4 flex flex-wrap gap-4">
                 {project.skills.map((skill) => (
                   <div>
                     <Icon name={skill?.icon} width="32" height="32" />
                   </div>
                 ))}
               </div>
+
+              {project.ongoing && (
+                <Chip size="sm" class="mt-auto hidden max-w-min sm:inline">
+                  ongoing
+                </Chip>
+              )}
             </div>
 
             <div class="flex flex-col">
@@ -111,32 +119,40 @@ const projects = (
 
               <h3 class="mb-4 text-justify">{project.description}</h3>
 
-              <div class="ml-auto mt-auto flex gap-2">
-                {project.githubLink && (
-                  <Button
-                    as="a"
-                    href={project.githubLink}
-                    target="_blank"
-                    variant="ghost"
-                    icon
-                    class="hover:bg-neutral-300 dark:hover:bg-neutral-700"
-                    aria-label="Link to the source code on GitHub"
-                  >
-                    <Icon name="brand-github" width="24" height="24" />
-                  </Button>
+              <div class="mt-auto flex items-center justify-between">
+                {project.ongoing && (
+                  <Chip size="sm" class="sm:hidden">
+                    ongoing
+                  </Chip>
                 )}
 
-                {project.externalLink && (
-                  <Button
-                    as="a"
-                    href={project.externalLink}
-                    target="_blank"
-                    icon
-                    aria-label="Link to the project"
-                  >
-                    <Icon name="external-link" width="24" height="24" />
-                  </Button>
-                )}
+                <div class="ml-auto mt-auto flex gap-2">
+                  {project.githubLink && (
+                    <Button
+                      as="a"
+                      href={project.githubLink}
+                      target="_blank"
+                      variant="ghost"
+                      icon
+                      class="hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      aria-label="Link to the source code on GitHub"
+                    >
+                      <Icon name="brand-github" width="24" height="24" />
+                    </Button>
+                  )}
+
+                  {project.externalLink && (
+                    <Button
+                      as="a"
+                      href={project.externalLink}
+                      target="_blank"
+                      icon
+                      aria-label="Link to the project"
+                    >
+                      <Icon name="external-link" width="24" height="24" />
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           </div>

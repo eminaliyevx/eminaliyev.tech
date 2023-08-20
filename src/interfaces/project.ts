@@ -13,5 +13,7 @@ export interface IProject {
       EntryFieldTypes.EntryLink<ISkill<"technical">>
     >;
     images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    endDate: EntryFieldTypes.Date;
+    ongoing: EntryFieldTypes.Boolean;
   };
 }
