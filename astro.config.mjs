@@ -42,5 +42,6 @@ export default defineConfig({
     assets: "assets",
     inlineStylesheets: "auto",
   },
+  compressHTML: true,
   site: "https://eminaliyev.tech",
 });
