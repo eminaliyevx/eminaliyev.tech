@@ -16,7 +16,7 @@ export const convertDates = (startDate: string, endDate: string | null) => {
         month: "long",
         year: "numeric",
       })
-    : "Present";
+    : "present";
 
   return `${start} - ${end}`;
 };
@@ -27,4 +27,12 @@ export const calculateResizedWidth = (
   resizedHeight: number,
 ) => {
   return Math.round((originalWidth * resizedHeight) / originalHeight);
+};
+
+export const calculateResizedHeight = (
+  originalWidth: number,
+  originalHeight: number,
+  resizedWidth: number,
+) => {
+  return Math.round((originalHeight * resizedWidth) / originalWidth);
 };

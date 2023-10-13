@@ -13,77 +13,23 @@ const skills = (
 ---
 
 <section>
-  <div class="mb-4">
-    <h1 class="text-2xl font-semibold">🤹🏻 Skills</h1>
-  </div>
+  <Chip variant="outline" radius="lg" title class="mb-4">Skills</Chip>
 
-  <div>
-    <h2
-      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
-    >
-      Languages
-    </h2>
-
-    <div class="mb-4 flex gap-4">
-      {
-        skills
-          .filter((skill) => skill.type === "language")
-          .map((language) => (
-            <Chip variant="icon" class="px-3" clickable>
-              <Icon name={language.icon} width="32" height="32" />
-              <span class="text-neutral-900 dark:text-neutral-50">
-                {language.name}
-              </span>
-            </Chip>
-          ))
-      }
-    </div>
-
-    <h2
-      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
-    >
-      Technical skills
-    </h2>
-
-    <div class="mb-4 flex flex-wrap gap-4">
-      {
-        skills
-          .filter((skill) => skill.type === "technical")
-          .map((skill) => (
-            <Chip variant="icon" class="px-3" clickable>
-              <Icon name={skill.icon} width="32" height="32" />
-              <span class="text-neutral-900 dark:text-neutral-50">
-                {skill.name}
-              </span>
-            </Chip>
-          ))
-      }
-    </div>
-
-    <h2
-      class="mb-4 list-item list-inside list-square marker:text-emerald-500 dark:marker:text-yellow-600"
-    >
-      Soft skills
-    </h2>
-
-    <div class="flex flex-wrap gap-4">
-      {
-        skills
-          .filter((skill) => skill.type === "soft")
-          .map((skill) => (
-            <Chip variant="icon" class="px-3" clickable>
-              <Icon
-                name={skill.icon}
-                width="32"
-                height="32"
-                class="text-emerald-500 dark:text-yellow-500"
-              />
-              <span class="text-neutral-900 dark:text-neutral-50">
-                {skill.name}
-              </span>
-            </Chip>
-          ))
-      }
-    </div>
+  <div class="flex flex-wrap gap-4">
+    {
+      skills
+        .filter((skill) => skill.type === "technical")
+        .map((skill) => (
+          <Chip
+            clickable
+            class="h-auto gap-2 rounded-3xl bg-neutral-100 py-2 transition dark:bg-neutral-800"
+          >
+            <Icon name={skill.icon} width="32" height="32" />
+            <span class="text-neutral-900 dark:text-neutral-50">
+              {skill.name}
+            </span>
+          </Chip>
+        ))
+    }
   </div>
 </section>

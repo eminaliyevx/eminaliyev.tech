@@ -5,10 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Open Sans Variable", "sans-serif"],
-      },
-      listStyleType: {
-        square: "square",
+        ubuntu: ["Ubuntu", "sans-serif"],
       },
     },
   },

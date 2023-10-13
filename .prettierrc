@@ -6,5 +6,5 @@
   ],
   "organizeImportsSkipDestructiveCodeActions": true,
   "tailwindConfig": "./tailwind.config.cjs",
-  "tailwindFunctions": ["cva"]
+  "tailwindFunctions": ["cva", "cn"]
 }

@@ -3,16 +3,28 @@ import { cn } from "@/lib";
 import type { HTMLTag, Polymorphic } from "astro/types";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const chip = cva("rounded-3xl text-center", {
+const chip = cva("flex max-w-fit items-center text-center", {
   variants: {
     variant: {
       primary:
-        "bg-emerald-500 text-neutral-50 dark:bg-yellow-500 dark:text-neutral-900",
-      icon: "flex items-center gap-2 bg-neutral-200 transition dark:bg-neutral-800",
+        "bg-green-500 text-neutral-50 dark:bg-yellow-500 dark:text-neutral-800",
+      outline:
+        "border-2 border-green-500 text-green-500 dark:border-yellow-500 dark:text-yellow-500",
     },
     size: {
-      sm: "px-3 py-1 text-sm",
-      md: "px-4 py-2 text-base",
+      sm: "h-[28px] px-4 text-base",
+      md: "h-8 px-4 text-base",
+    },
+    radius: {
+      base: "rounded",
+      sm: "rounded-sm",
+      md: "rounded-xl",
+      lg: "rounded-lg",
+      xl: "rounded-xl",
+      none: "rounded-none",
+    },
+    title: {
+      true: "font-medium uppercase",
     },
     clickable: {
       true: "cursor-pointer hover:scale-95 active:scale-95",
@@ -26,6 +38,8 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> &
 const {
   variant = "primary",
   size = "md",
+  radius = "base",
+  title,
   clickable,
   class: className,
   as: Tag = "span",
@@ -33,6 +47,11 @@ const {
 } = Astro.props;
 ---
 
-<Tag class={cn(chip({ variant, size, clickable, class: className }))} {...rest}>
+<Tag
+  class={cn(
+    chip({ variant, size, radius, title, clickable, class: className }),
+  )}
+  {...rest}
+>
   <slot />
 </Tag>

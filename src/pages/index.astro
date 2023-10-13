@@ -1,26 +1,57 @@
 ---
+import Divider from "@/components/Divider.astro";
 import Education from "@/components/Education.astro";
 import Experience from "@/components/Experience.astro";
+import Hero from "@/components/Hero.astro";
 import Skills from "@/components/Skills.astro";
-import Layout from "../layouts/Layout.astro";
+import Summary from "@/components/Summary.astro";
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
-  active="/"
   seo={{
-    title: "CV",
-    description:
-      "My unmatched perspicacity coupled with my sheer indefatigability makes me a feared opponent in any realm of human endeavor.",
+    title: "Emin Aliyev",
+    description: "I am an experienced software developer based in Azerbaijan.",
     openGraph: {
       basic: {
-        title: "CV | Emin Aliyev",
+        title: "Emin Aliyev",
         type: "website",
-        image: "https://eminaliyev.tech/assets/b3f2a3ef_ZpQdKu.webp",
+        image: "https://next.eminaliyev.tech/assets/b3f2a3ef_Z2ixeTg.webp",
       },
     },
   }}
 >
+  <Hero />
+
+  <Divider class="my-4" />
+
+  <Summary />
+
+  <Divider class="my-4" />
+
   <Experience />
+
+  <Divider class="my-4" />
+
   <Education />
+
+  <Divider class="my-4" />
+
   <Skills />
 </Layout>
+
+<script>
+  const stickyText = document.querySelector(
+    "[data-sticky-text]",
+  ) as HTMLDivElement;
+  const downloadCvButton = document.querySelector(
+    "[data-download-cv]",
+  ) as HTMLAnchorElement;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => stickyText.classList.toggle("hidden", entry.isIntersecting),
+    { rootMargin: "-120px 0px 0px 0px" },
+  );
+
+  observer.observe(downloadCvButton);
+</script>

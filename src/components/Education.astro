@@ -1,8 +1,8 @@
 ---
+import XAccordion from "@/components/XAccordion.astro";
 import type { IEducation } from "@/interfaces";
-import { Contentful, calculateResizedWidth, cn, convertDates } from "@/lib";
-import type { OutputFormat } from "@/types";
-import { Image } from "@astrojs/image/components";
+import { Contentful, calculateResizedHeight, cn, convertDates } from "@/lib";
+import { Image } from "astro:assets";
 import Chip from "./Chip.astro";
 
 const education = (
@@ -16,66 +16,61 @@ const education = (
 }));
 ---
 
-<section class="mb-8">
-  <div class="mb-4 flex flex-col items-start gap-2 sm:flex-row sm:items-center">
-    <h1 class="text-2xl font-semibold">🏫 Education</h1>
-    <span
-      class="rounded-3xl bg-emerald-500 px-3 py-1 text-center text-sm text-neutral-100 dark:bg-yellow-500 dark:text-neutral-900"
-      >Bachelor of Science in Information Technology 🎓</span
-    >
-  </div>
+<section>
+  <Chip variant="outline" radius="lg" title class="mb-4">Education</Chip>
 
-  <div class="grid gap-8 md:grid-cols-2">
+  <XAccordion class="flex flex-col gap-4">
     {
       education.map((education) => (
-        <div class="flex flex-col rounded-2xl bg-neutral-100 p-5 shadow-lg dark:bg-neutral-800">
-          <div class="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
-            <div class="flex items-center gap-2">
-              <Image
-                src={`https:${education.logo!.url}`}
-                alt={education.school}
-                width={calculateResizedWidth(
-                  education.logo!.details.image!.width,
-                  education.logo!.details.image!.height,
-                  32,
-                )}
-                height={32}
-                format={education.logo!.fileName.split(".")[1] as OutputFormat}
-              />
+        <details class="overflow-hidden rounded-lg bg-neutral-100 transition-colors hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700">
+          <summary class="flex cursor-pointer flex-col justify-between gap-4 p-4 sm:flex-row sm:items-center sm:gap-0">
+            <div class="flex items-center gap-3">
+              <div class="h-8 w-8">
+                <Image
+                  src={`https:${education.logo?.url}`}
+                  alt={education.school}
+                  width={96}
+                  height={calculateResizedHeight(
+                    education.logo!.details.image!.width,
+                    education.logo!.details.image!.height,
+                    96,
+                  )}
+                  format={education.logo!.fileName.split(".")[1]}
+                />
+              </div>
 
-              <div class="flex flex-col gap-1">
-                <h2 class="text-lg/none font-semibold">{education.school}</h2>
+              <div class="flex flex-col gap-2">
+                <h2 class="text-lg/none font-medium">{education.school}</h2>
                 <h3 class="leading-none">{education.program}</h3>
               </div>
             </div>
 
-            <div>
-              <Chip as="div" size="sm" class="mb-2">
-                {convertDates(education.startDate, education.endDate)}
-              </Chip>
+            <Chip
+              variant="outline"
+              radius="xl"
+              size="sm"
+              class="border-none bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-50"
+            >
+              {convertDates(education.startDate, education.endDate)}
+            </Chip>
+          </summary>
 
-              <Chip
-                as="div"
-                size="sm"
-                class="w-max sm:ml-auto"
-              >{`GPA: ${education.gpa}/4.0`}</Chip>
-            </div>
+          <div class="px-4 pb-4">
+            <ul
+              class={cn(
+                "list-inside list-disc marker:text-green-500 dark:marker:text-yellow-500",
+                {
+                  "columns-2": education.courses.length > 4,
+                },
+              )}
+            >
+              {education.courses.map((course) => (
+                <li>{course}</li>
+              ))}
+            </ul>
           </div>
-
-          <ul
-            class={cn(
-              "mb-8 list-inside list-square gap-8 marker:text-emerald-500 dark:marker:text-yellow-600",
-              {
-                "columns-2": education.courses.length > 4,
-              },
-            )}
-          >
-            {education.courses.map((course) => (
-              <li>{course}</li>
-            ))}
-          </ul>
-        </div>
+        </details>
       ))
     }
-  </div>
+  </XAccordion>
 </section>

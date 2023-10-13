@@ -1,35 +1,32 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import Sidebar from "@/components/Sidebar.astro";
 import "@/styles/globals.css";
-import "@fontsource-variable/open-sans";
-import { SEO, Props as SEOProps } from "astro-seo";
-import { ViewTransitions } from "astro:transitions";
+import "@fontsource/ubuntu/300.css";
+import "@fontsource/ubuntu/400.css";
+import "@fontsource/ubuntu/500.css";
+import "@fontsource/ubuntu/700.css";
+import { SEO, type Props as SEOProps } from "astro-seo";
 
-export interface Props {
-  active: string;
+interface Props {
   seo?: SEOProps;
 }
 
-const { active, seo } = Astro.props;
+const { seo } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <SEO titleTemplate="%s | Emin Aliyev" {...seo} />
-    <ViewTransitions />
+    <SEO {...seo} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <script is:inline>
-      if (!window.initialized) {
-        window.initialized = true;
-
+      const loadTheme = () => {
         const theme = (() => {
           if (
             typeof localStorage !== "undefined" &&
@@ -51,43 +48,31 @@ const { active, seo } = Astro.props;
         if (theme === "dark") {
           document.documentElement.classList.add("dark");
         }
-      }
+      };
+
+      loadTheme();
     </script>
   </head>
   <body
-    class="scrollbar-x scrollbar-y min-h-screen bg-neutral-50 text-neutral-600 selection:bg-emerald-500 selection:text-neutral-50 dark:bg-neutral-900 dark:text-neutral-300 dark:selection:bg-yellow-500 dark:selection:text-neutral-900"
+    class="bg-neutral-50 font-ubuntu text-neutral-800 selection:bg-green-500 selection:text-neutral-50 dark:bg-neutral-900 dark:text-neutral-50 dark:selection:bg-yellow-500 dark:selection:text-neutral-800"
   >
-    <Header active={active} />
+    <Header />
 
-    <Sidebar />
-
-    <main class="px-4 pb-20 pt-20 lg:pb-10 lg:pl-80 lg:pr-8 lg:pt-24">
-      <slot />
+    <main class="px-4 pb-4">
+      <div class="mx-auto max-w-3xl">
+        <slot />
+      </div>
     </main>
 
-    <Footer active={active} />
+    <Footer />
 
-    <div
-      class="fixed inset-0 z-30 hidden bg-neutral-900/50 backdrop-blur"
-      data-sidebar-toggle
-      data-sidebar-backdrop
-    >
-    </div>
+    <script>
+      const loadScripts = () => {
+        const themeToggle = document.querySelector(
+          "[data-theme-toggle]",
+        ) as HTMLButtonElement;
 
-    <script is:inline>
-      document.querySelectorAll("[data-sidebar-toggle]").forEach((element) => {
-        element.addEventListener("click", () => {
-          document.querySelector("aside")?.classList.toggle("transform-none");
-          document
-            .querySelector("[data-sidebar-backdrop]")
-            ?.classList.toggle("hidden");
-          document.body.classList.toggle("overflow-hidden");
-        });
-      });
-
-      document
-        .querySelector("[data-theme-toggle]")
-        ?.addEventListener("click", () => {
+        themeToggle.addEventListener("click", () => {
           const theme = localStorage.getItem("theme") || "light";
 
           if (theme === "light") {
@@ -98,12 +83,9 @@ const { active, seo } = Astro.props;
             document.documentElement.classList.remove("dark");
           }
         });
-    </script>
+      };
 
-    <script is:inline>
-      if (Fancybox) {
-        Fancybox.bind("[data-fancybox]");
-      }
+      loadScripts();
     </script>
   </body>
 </html>
